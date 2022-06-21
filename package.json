@@ -36,5 +36,9 @@
     "karma-jasmine-html-reporter": "~1.7.0",
     "prettier": "^2.7.1",
     "typescript": "~4.7.2"
-  }
+  },
+  "keywords": [
+    "angular",
+    "tour of heroes"
+  ]
 }
