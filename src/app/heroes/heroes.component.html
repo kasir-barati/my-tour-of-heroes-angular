@@ -22,16 +22,6 @@
   - [ngClass]="selectedHero.id === hero.id ? 'selected' : ''"
  -->
 
-<div *ngIf="selectedHero">
-  <h2>{{ selectedHero.name | uppercase }}</h2>
-  <div>{{ selectedHero.id }}</div>
-  <div>
-    <label for="hero-name">Hero name:</label>
-    <input
-      type="text"
-      placeholder="Hero name"
-      id="hero-name"
-      [(ngModel)]="selectedHero.name"
-    />
-  </div>
-</div>
+<ng-container *ngIf="selectedHero">
+  <app-hero-details [hero]="selectedHero"></app-hero-details>
+</ng-container>
