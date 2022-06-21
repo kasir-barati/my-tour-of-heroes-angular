@@ -97,3 +97,27 @@
   - :capricorn: A list of available events:
     - [Stackoverflow Q&A](https://stackoverflow.com/questions/34928461/)
     - [Angular awful terrible documentation](https://angular.io/guide/event-binding)
+
+## [Forth step](https://angular.io/tutorial/toh-pt3)
+
+- Keeping all functionalities in one component is not maintainable.
+- So we do this: largeComponent / asMuchAsIsRational = many small components;
+- Each sub-component focus on a specific **task**/**workflow**
+- Now we wanna break our own heroes component:
+  - `ng generate component hero-details`
+  - We need now to pass the selected hero to the generated component.
+    - Sharing data between child and parent component is a common pattern
+    - `@Input` and `@Output` decorator are specialist in this topic.
+      - `@Input`:
+        - Pass data from parent to child
+        - Bind data from parent to child
+        - Parent use [property binding](https://angular.io/guide/property-binding) to pass data.
+        - To watch changes we can use [onChanges lifecycle hook](https://angular.io/guide/lifecycle-hooks#onchanges)
+      - `@Output`:
+        - Pass data from child to parent
+        - Bind triggered event from child to parent
+        - Parent uses [event binding](https://angular.io/guide/event-binding) to catch triggered events from child component
+        - A doorway to pass data from child to parent
+        - Child component raise an event
+        - Parent can catch passed values with `$event`
+    - Parent component is the context for child component
