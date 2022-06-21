@@ -8,6 +8,11 @@
     - Use Angular CLI
     - Features which we will front in any data-driven app
 
+# :capricorn: General info which is correct in all steps
+
+- use `--skip-tests` to tell Angular CLI that you do not wanna write unit test for that schematic. BTW I do not advocate this idea, but sometimes we need it.
+- I'd like to keep related things in a directory. I mean I do not do something like this: `ng generate service services/user` and `ng generate component components/user` instead I'll prefer to keep to this method: `ng generate component user && ng generate service user/user`
+
 ## [First step](https://angular.io/tutorial/toh-pt0)
 
 - Setup your local development env and workspace:
@@ -57,3 +62,24 @@
        - NSFW but based on my gut it is good for prod env
        - Compile first and then loaded by browser
 - _Interpolation binding_ syntax which we use in templates: `{{ title }}`. It takes the value from `app.component.ts`
+
+## [Second step](https://angular.io/tutorial/toh-pt1)
+
+- To create a new component we rely on the power of Angular CLI:
+  - `ng generate component heroes`
+  - This command will generates a new component in `/app` with `heroes` name.
+- Now its time to create a new interface for the `hero`es type. In tut they create it in the `/app/hero.ts`.
+  - Later I'll refactor this like this: `mv src/app/hero.ts app/heroes/hero.model.ts`
+  - :capricorn: In Angular from the beginning we are typed. Although you can ignore it but I do not suggest it.
+- Another cool feature which is very close to handlebars is that we can define custom functions and call them in our templates. In Angular we call them `Pipe`.
+  - {{ hero.name | uppercase }}
+  - Pipes usually is used to format data before showing them
+  - We have built-in pipes and the functionality to create new custom pipes
+- To edit hero's name:
+  - We wanna do it in a live manner.
+  - I wanna see the data from component to the view flows and vice versa.
+  - We call this type of data binding **2 way data binding**.
+  - `[(ngModel)]` is the directive that we need.
+  - Angular with metadata which we pass to it knows how our app works. We have seen the `@Component` decorator and its metadata. `@NgModule` is another decorator which is very important.
+    - For example now we need to add `FormsModule` in the `imports`'s in `AppModule`.
+    - Or each component to be known by Angular have to be declared in one `@NgModule`. Good Angular CLI done it up until now. Remember we never did declare any component to Angular.
