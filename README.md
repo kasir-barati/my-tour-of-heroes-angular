@@ -83,3 +83,17 @@
   - Angular with metadata which we pass to it knows how our app works. We have seen the `@Component` decorator and its metadata. `@NgModule` is another decorator which is very important.
     - For example now we need to add `FormsModule` in the `imports`'s in `AppModule`.
     - Or each component to be known by Angular have to be declared in one `@NgModule`. Good Angular CLI done it up until now. Remember we never did declare any component to Angular.
+
+## [Third step](https://angular.io/tutorial/toh-pt2)
+
+- `*ngFor` used to:
+  - Show them in view
+  - A repeater directive
+- Follow semantic HTML and use appropriate tags. Because of [accessibility](https://angular.io/guide/accessibility)
+  - For example instead of giving `(click)` event to the li we used `button` tag.
+  - People with visual or motor impairment uses special technologies to help them surfing web and those technologies leverage the semantic HTML
+- Each css file in each component is scoped to that component. No pollution.
+- To bind events we use `(specifiedEventName)`.
+  - :capricorn: A list of available events:
+    - [Stackoverflow Q&A](https://stackoverflow.com/questions/34928461/)
+    - [Angular awful terrible documentation](https://angular.io/guide/event-binding)

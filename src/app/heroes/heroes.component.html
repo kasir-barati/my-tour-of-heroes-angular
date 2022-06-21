@@ -1,13 +1,37 @@
-<h2>{{ hero.name | uppercase }} Details</h2>
-<div><span>id: </span>{{ hero.id }}</div>
-<div><span>Name: </span>{{ hero.name }}</div>
+<h2>Heroes</h2>
+<ul class="heroes">
+  <li *ngFor="let hero of heroes">
+    <button
+      [class.selected]="hero === selectedHero"
+      (click)="onSelect(hero)"
+      type="button"
+    >
+      <span class="badge">{{ hero.id }}</span>
+      &nbsp;
+      <span class="name">{{ hero.name }}</span>
+    </button>
+  </li>
+</ul>
 
-<div>
-  <label for="name">Hero name: </label>
-  <input
-    type="text"
-    placeholder="name"
-    id="name"
-    [(ngModel)]="hero.name"
-  />
+<!-- 
+  Correct usage:
+  - [class.selected]="hero === selectedHero"
+  - [ngClass]="selectedHero?.id === hero.id ? 'selected' : ''"
+  Wrong usage:
+  Because selectedHero is empty at first glance
+  - [ngClass]="selectedHero.id === hero.id ? 'selected' : ''"
+ -->
+
+<div *ngIf="selectedHero">
+  <h2>{{ selectedHero.name | uppercase }}</h2>
+  <div>{{ selectedHero.id }}</div>
+  <div>
+    <label for="hero-name">Hero name:</label>
+    <input
+      type="text"
+      placeholder="Hero name"
+      id="hero-name"
+      [(ngModel)]="selectedHero.name"
+    />
+  </div>
 </div>
