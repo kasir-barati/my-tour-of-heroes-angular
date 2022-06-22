@@ -210,6 +210,9 @@
     - Normalize URL
     - Go back to the previous view
 
-## [Last step]()
+## [Last step](https://angular.io/tutorial/toh-pt6)
 
 - If you neglect to `subscribe()` to an observable, that method's logic won't be executed. As a rule, **an Observable does nothing until something subscribes**.
+- :capricorn: If you wanna learn RxJS I suggest to learn Angular since it is heavily use it.
+- To Add new hero we create a new `input` element and paired it with and `button` element.
+- This Time I put more details in the code. So please read the code/PR carefully.
