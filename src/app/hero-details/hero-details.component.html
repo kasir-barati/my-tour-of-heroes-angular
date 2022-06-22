@@ -1,4 +1,38 @@
-<div>
+<ng-template [ngIf]="hero" [ngIfElse]="elseBlock">
+  <div>
+    <h2>{{ hero.name | uppercase }}</h2>
+    <div>{{ hero.id }}</div>
+    <div>
+      <label for="hero-name">Hero name:</label>
+      <input
+        type="text"
+        placeholder="Hero name"
+        id="hero-name"
+        [(ngModel)]="hero.name"
+      />
+    </div>
+  </div>
+</ng-template>
+<ng-template #elseBlock>
+  <div>Hero does not found</div>
+</ng-template>
+
+<button type="button" (click)="onClickGoBack()">Go back</button>
+
+<!-- 
+  Wrong usage: 
+  - *ngIf="hero" *ngIfElse="elseBlock"
+  Can't have multiple template bindings on one element. Use only one attribute prefixed with *ngtsc(-995002)
+  - [ngIf]="hero" [ngIfElse]="elseBlock"
+  Object is possibly 'undefined'.ngtsc(2532)
+  - *ngIf="hero" [ngIfElse]="elseBlock"
+  Can't bind to 'ngIfElse' since it isn't a known property of 'div'.ngtsc(-998002)
+ -->
+
+<!-- 
+  Option 1
+
+  <div *ngIf="hero; else elseBlock">
   <h2>{{ hero.name | uppercase }}</h2>
   <div>{{ hero.id }}</div>
   <div>
@@ -10,4 +44,8 @@
       [(ngModel)]="hero.name"
     />
   </div>
-</div>
+  </div>
+  <ng-template #elseBlock>
+    <div>Hero does not found</div>
+  </ng-template>
+ -->

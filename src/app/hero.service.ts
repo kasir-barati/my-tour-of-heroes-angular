@@ -22,6 +22,13 @@ export class HeroService {
     return observableHeroes;
   }
 
+  getHeroById(id: number): Observable<Hero | undefined> {
+    const hero = HEROES.filter((hero) => hero.id === id).shift();
+
+    this.messageService.add(`HeroService: fetched hero id=${id}`);
+    return of(hero);
+  }
+
   // Another approach in observables. TBH IDK so much about the difference but I will do understand
   // getHeroes(): Observable<Hero> {
   //   return of(...HEROES);

@@ -11,8 +11,6 @@ import { MessageService } from '../message.service';
 })
 export class HeroesComponent implements OnInit {
   heroes: Hero[];
-  // Please note that mark nullable parameters as nullable
-  selectedHero?: Hero;
 
   constructor(
     private heroService: HeroService,
@@ -33,14 +31,6 @@ export class HeroesComponent implements OnInit {
      * So ngOnInit lifecycle hook is a better place to do a HTTP request.
      */
     this.getHeroes();
-  }
-
-  onSelect(hero: Hero): void {
-    // Because I guess we are using pass by reference changes in the selectedHero goes all the way up to reach to the heroes property.
-    this.selectedHero = hero;
-    this.messageService.add(
-      `HeroesComponent: Selected hero id=${hero.id}`,
-    );
   }
 
   private getHeroes(): void {
