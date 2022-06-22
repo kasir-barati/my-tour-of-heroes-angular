@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 
 import { Hero } from '../hero';
 import { HeroService } from '../hero.service';
+import { MessageService } from '../message.service';
 
 @Component({
   selector: 'app-heroes',
@@ -13,7 +14,10 @@ export class HeroesComponent implements OnInit {
   // Please note that mark nullable parameters as nullable
   selectedHero?: Hero;
 
-  constructor(private heroService: HeroService) {
+  constructor(
+    private heroService: HeroService,
+    private messageService: MessageService,
+  ) {
     /**
      * Reserve the constructor for:
      *   - minimal initialization - e.x. wiring constructor parameters to properties.
@@ -34,9 +38,22 @@ export class HeroesComponent implements OnInit {
   onSelect(hero: Hero): void {
     // Because I guess we are using pass by reference changes in the selectedHero goes all the way up to reach to the heroes property.
     this.selectedHero = hero;
+    this.messageService.add(
+      `HeroesComponent: Selected hero id=${hero.id}`,
+    );
   }
 
   private getHeroes(): void {
-    this.heroes = this.heroService.getHeroes();
+    this.heroService.getHeroes().subscribe({
+      next: (heroes) => {
+        this.heroes = heroes;
+      },
+      error: (error) => {
+        console.error(error);
+      },
+      complete: () => {
+        console.info('Getting heroes completed.');
+      },
+    });
   }
 }
