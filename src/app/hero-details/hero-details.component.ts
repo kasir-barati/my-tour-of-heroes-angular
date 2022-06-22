@@ -60,4 +60,13 @@ export class HeroDetailsComponent implements OnInit {
   onClickGoBack() {
     this.location.back();
   }
+
+  onSave(hero: Hero) {
+    return this.heroService.updateHero(hero).subscribe({
+      next: (hero) => {
+        // Why?
+        this.onClickGoBack();
+      },
+    });
+  }
 }
