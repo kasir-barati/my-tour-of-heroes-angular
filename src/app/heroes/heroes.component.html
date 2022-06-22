@@ -1,15 +1,11 @@
 <h2>Heroes</h2>
 <ul class="heroes">
   <li *ngFor="let hero of heroes">
-    <button
-      [class.selected]="hero === selectedHero"
-      (click)="onSelect(hero)"
-      type="button"
-    >
+    <a routerLink="/heroes/{{ hero.id }}">
       <span class="badge">{{ hero.id }}</span>
       &nbsp;
       <span class="name">{{ hero.name }}</span>
-    </button>
+    </a>
   </li>
 </ul>
 
@@ -21,7 +17,3 @@
   Because selectedHero is empty at first glance
   - [ngClass]="selectedHero.id === hero.id ? 'selected' : ''"
  -->
-
-<ng-container *ngIf="selectedHero">
-  <app-hero-details [hero]="selectedHero"></app-hero-details>
-</ng-container>
