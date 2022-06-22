@@ -148,3 +148,64 @@
 - To show messages we created another component and service:
   - `ng generate component messages`
   - `ng generate service message`
+
+## [Sixth step](https://angular.io/tutorial/toh-pt5)
+
+- Routing in Angular:
+  1. Would be done in a top level module.
+     - :capricorn: But I'd like to change it a little bit. TBH I am not still sure if it is good or not. Also I ma not 100% antagonistic.
+     - :capricorn: I do the defining `Routes` part in each module/component and use them in the main routing file.
+  2. If you while `ng new app-name` like most of the time has said yes to adding routes it should be already in place. But if you do not it is as simple as:
+     - `ng generate module app-routing --flat --module app`
+     - **app-routing** name is a convention
+     - `--flat` tells Angular to create new module with no directory
+     - `--module app` tells Angular to auto import it in the `AppModule`
+- [`Route`](https://angular.io/api/router/Route) key-value pairs:
+  - `path`: string, URL in address bar
+  - `component`: Component name, This component will be instantiated when user goes to that URL
+- [`RouterModule`](https://angular.io/api/router/RouterModule):
+  - Supplies directives, providers, etc
+  - Perform initial navigation based on URL
+- [`router-outlet`](https://angular.io/api/router/RouterOutlet):
+  - Specify the placeholder for Angular to show routed view.
+  - We have this **directive** because of `AppRoutingModule` is defined in the `AppModule`
+- To create a nav bar we do this:
+  - `<a routerLink="/heroes">Heroes</a>`
+    - :capricorn: `routerLink`:
+      - Turns user click into navigation without refreshing page - :capricorn: In other word it first do a `e.preventDefault()`
+      - When its value starts with `/` it means start looking from root of the app
+      - When its value starts with `./` it means that look inside its children
+      - When its value starts with `./` it means that goes one level up
+      - `/users/:id`
+        That `:id` is placeholder
+        ```html
+        <a routerLink="/users/{{user.id}}">{{user.name}}</a>
+        ```
+      - `/articles/:categoryId?published=true`
+        ```html
+        <a
+          [routerLink]="['/articles/angular']"
+          [queryParams]="{published: true}"
+        >
+          Get all published Angular articles
+        </a>
+        ```
+- Generate dashboard: `ng generate component dashboard`
+  - Add its route in the `AppRoutingModule`
+  - Add default path to redirect to the `/dashboard`:
+    - `{path: "", redirectTo: "/dashboard", pathMatch: "full"}`
+    - `pathMatch: "full"` prevent from infinite redirecting. **This is a must**
+    - Order in the `routes` variable matters.
+      - :capricorn: Except for the default one. It does not matter to be placed where. But I hve doubt about it, So it is best to put the default route the last one.
+  - Librate the hero details component from heroes component
+    - First add a route to it `{path: "heroes/:id", component: HeroDetailsComponent}`
+- :capricorn: `*ngIf` adds a `ng-template` for us behind the sense:
+  - `ng-template` directive help us to control what should be shown and under what condition.
+  - Usually we use them with [structural directives such as `*ngIf`](https://angular.io/guide/structural-directives).
+- :capricorn: [`ActivatedRoute`](https://angular.io/api/router/ActivatedRoute)
+  - Access to the information about the route which is associated with this component
+    - Things like: query param, query string, ...
+- :capricorn: [Location](https://angular.io/api/common/Location)
+  - Interacts with browser, We can do thing like:
+    - Normalize URL
+    - Go back to the previous view
