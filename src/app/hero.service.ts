@@ -25,6 +25,7 @@ export class HeroService {
   getHeroById(id: number): Observable<Hero | undefined> {
     const hero = HEROES.filter((hero) => hero.id === id).shift();
 
+    this.messageService.add(`HeroService: fetched hero id=${id}`);
     return of(hero);
   }
 
