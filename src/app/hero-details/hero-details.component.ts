@@ -1,3 +1,4 @@
+import { Location } from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
@@ -16,22 +17,29 @@ export class HeroDetailsComponent implements OnInit {
   constructor(
     private heroService: HeroService,
     private activatedRoute: ActivatedRoute,
+    private location: Location,
   ) {}
 
   ngOnInit(): void {
-    this.activatedRoute.params.subscribe({
-      next: (queryParams) => {
-        const heroId = queryParams['id'];
-        debugger;
-        this.getHero(heroId);
-      },
-      error: (error) => {
-        console.error(error);
-      },
-      complete: () => {
-        console.info('Getting query params completed.');
-      },
-    });
+    const heroId = this.activatedRoute.snapshot.paramMap.get('id');
+    this.getHero(Number(heroId));
+
+    /**
+     * Correct usage:
+     *   - this.activatedRoute.paramMap.subscribe
+     * Wrong usage:
+     *   - this.activatedRoute.params.subscribe
+     *
+     * queryParams: Observable<Params>
+     * An observable of the query parameters shared by all the routes.
+     *
+     * params: Observable<Params>
+     * An observable of the matrix parameters scoped to this route.
+     *
+     * paramMap: Observable<ParamMap>
+     * An Observable that contains a map of the required and optional parameters specific to the route.'
+     * The map supports retrieving single and multiple values from the same parameter.
+     */
   }
 
   getHero(id: number) {
@@ -47,5 +55,9 @@ export class HeroDetailsComponent implements OnInit {
         console.info('Fetching hero information completed');
       },
     });
+  }
+
+  onClickGoBack() {
+    this.location.back();
   }
 }
