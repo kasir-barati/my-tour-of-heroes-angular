@@ -1,6 +1,6 @@
 # My Tour Of Heroes Angular
 
-- I flagged parts where I added and is not in the official doc by :capricorn: symbol which is my birthday zodiac symbol
+- I flagged parts where I added and is not in the official tutorial doc by :capricorn: symbol which is my birthday zodiac symbol
 - This tutorial meant to be:
   - From ground up
   - Introduction to basic app-design concepts/tools/terminology:
@@ -108,16 +108,43 @@
   - We need now to pass the selected hero to the generated component.
     - Sharing data between child and parent component is a common pattern
     - `@Input` and `@Output` decorator are specialist in this topic.
-      - `@Input`:
+      - :capricorn: `@Input`:
         - Pass data from parent to child
         - Bind data from parent to child
         - Parent use [property binding](https://angular.io/guide/property-binding) to pass data.
         - To watch changes we can use [onChanges lifecycle hook](https://angular.io/guide/lifecycle-hooks#onchanges)
-      - `@Output`:
+      - :capricorn: `@Output`:
         - Pass data from child to parent
         - Bind triggered event from child to parent
         - Parent uses [event binding](https://angular.io/guide/event-binding) to catch triggered events from child component
         - A doorway to pass data from child to parent
         - Child component raise an event
         - Parent can catch passed values with `$event`
-    - Parent component is the context for child component
+    - :capricorn: Parent component is the context for child component
+
+## [Fifth step](https://angular.io/tutorial/toh-pt4)
+
+- Component's class:
+  - Should be lean and focused on supporting view
+  - When we separate data from it:
+    - Easier unit-test
+    - More flexibility to change how you deal with data
+  - Inside the `constructor` just do initialization:
+    - `this.messages = []`
+  - Inside the `ngOnInit` do advance things:
+    - Make HTTP calls
+    - Define your reactive forms
+    - etc
+- Service:
+  - Responsible for data access
+  - DI instead of `new`
+  - Share data between classes which does not know each other
+  - As we all know we should list our Injectable class in `providers` list in components' class. But we never done it. So how our code works?
+    - Because of `providedIn: 'root'`. This config tells Angular to provide this service globally.
+    - Making services global let Angular to get rid of unused services.
+    - Angular CLI did it for us
+- Observables advantages over syncs or promises method signature:
+  - Instead of having a freezed web app for a while we have a working app which later on would be completed
+- To show messages we created another component and service:
+  - `ng generate component messages`
+  - `ng generate service message`
