@@ -1,0 +1,21 @@
+<div id="search-compoent">
+  <label for="searhc-box">Hero name: </label>
+  <input
+    type="text"
+    name="search-box"
+    id="search-box"
+    #searchBox
+    (input)="onInputDoSearch(searchBox.value)"
+  />
+
+  <ul class="search-result">
+    <!-- 
+      Since *ngFor can't do anything with an Observable, use the async pipe.
+      Subscribes to an Observable automatically.
+      Read more: https://angular.io/api/common/AsyncPipe
+    -->
+    <li *ngFor="let hero of heroes$ | async">
+      <a routerLink="/heroes/{{ hero.id }}">{{ hero.name }}</a>
+    </li>
+  </ul>
+</div>

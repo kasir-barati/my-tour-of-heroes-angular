@@ -209,3 +209,7 @@
   - Interacts with browser, We can do thing like:
     - Normalize URL
     - Go back to the previous view
+
+## [Last step]()
+
+- If you neglect to `subscribe()` to an observable, that method's logic won't be executed. As a rule, **an Observable does nothing until something subscribes**.

@@ -62,8 +62,55 @@ export class HeroService {
     return this.httpClient
       .put<Hero>(`${this.heroesUrl}/${hero.id}`, hero)
       .pipe(
-        tap((hero) => this.logInMessage('Hero updated')),
+        tap((hero) =>
+          this.logInMessage(`Hero updated, id=${hero.id}`),
+        ),
         catchError(this.handleError<Hero>('updateHero')),
+      );
+  }
+
+  addHero(heroName: string): Observable<Hero> {
+    return this.httpClient
+      .post<Hero>(this.heroesUrl, {
+        name: heroName,
+      })
+      .pipe(
+        tap((hero) =>
+          this.logInMessage(`Hero created, name=${heroName}`),
+        ),
+        catchError(this.handleError<Hero>('addHero')),
+      );
+  }
+
+  deleteHero(id: number): Observable<Hero> {
+    return this.httpClient
+      .delete<Hero>(`${this.heroesUrl}/${id}`)
+      .pipe(
+        tap((hero) =>
+          this.logInMessage(`Delete operation done, id=${id}`),
+        ),
+        catchError(this.handleError<Hero>('Hero deleted')),
+      );
+  }
+
+  searchHeroes(name: string): Observable<Hero[]> {
+    if (!name.trim()) {
+      return of([]);
+    }
+
+    return this.httpClient
+      .get<Hero[]>(`${this.heroesUrl}?name=${name}`)
+      .pipe(
+        tap((heroes) =>
+          this.logInMessage(
+            heroes.length > 0
+              ? `Filtered heroes by name=${name}`
+              : `No hero matched with name=${name}`,
+          ),
+        ),
+        catchError(
+          this.handleError<Hero[]>(`Search hero, name=${name}`),
+        ),
       );
   }
 
@@ -72,7 +119,10 @@ export class HeroService {
   //   return of(...HEROES);
   // }
 
-  private handleError<T>(operation = 'operation', result?: T) {
+  private handleError<T>(
+    operation = 'operation',
+    result?: T,
+  ): (error: any) => Observable<T> {
     return (error: any): Observable<T> => {
       // TODO: send the error to remote logging infrastructure
       console.error(error);

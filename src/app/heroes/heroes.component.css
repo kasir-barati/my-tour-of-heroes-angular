@@ -1,6 +1,4 @@
-/*
- * HeroesComponent's **private** CSS styles 
- */
+/* HeroesComponent's private CSS styles */
 .heroes {
   margin: 0 0 2em 0;
   list-style-type: none;
@@ -8,49 +6,43 @@
   width: 15em;
 }
 
+input {
+  display: block;
+  width: 100%;
+  padding: 0.5rem;
+  margin: 1rem 0;
+  box-sizing: border-box;
+}
+
 .heroes li {
-  display: flex;
+  position: relative;
+  cursor: pointer;
+}
+
+.heroes li:hover {
+  left: 0.1em;
 }
 
 .heroes a {
-  flex: 1;
-  cursor: pointer;
-  position: relative;
+  color: #333;
   text-decoration: none;
-  left: 0;
   background-color: #eee;
   margin: 0.5em;
-  padding: 0;
+  padding: 0.3em 0;
+  height: 1.6em;
   border-radius: 4px;
-  display: flex;
-  align-items: stretch;
-  height: 1.8em;
+  display: block;
+  width: 100%;
 }
 
 .heroes a:hover {
   color: #2c3a41;
   background-color: #e6e6e6;
-  left: 0.1em;
 }
 
 .heroes a:active {
   background-color: #525252;
   color: #fafafa;
-}
-
-.heroes a.selected {
-  background-color: black;
-  color: white;
-}
-
-.heroes a.selected:hover {
-  background-color: #505050;
-  color: white;
-}
-
-.heroes a.selected:active {
-  background-color: black;
-  color: white;
 }
 
 .heroes .badge {
@@ -60,10 +52,39 @@
   padding: 0.8em 0.7em 0 0.7em;
   background-color: #405061;
   line-height: 1em;
+  position: relative;
+  left: -1px;
+  top: -4px;
+  height: 1.8em;
+  min-width: 16px;
+  text-align: right;
   margin-right: 0.8em;
   border-radius: 4px 0 0 4px;
 }
 
-.heroes .name {
-  align-self: center;
+.add-button {
+  padding: 0.5rem 1.5rem;
+  font-size: 1rem;
+  margin-bottom: 2rem;
+}
+
+.add-button:hover {
+  color: white;
+  background-color: #42545c;
+}
+
+button.delete {
+  position: absolute;
+  left: 210px;
+  top: 5px;
+  background-color: white;
+  color: #525252;
+  font-size: 1.1rem;
+  margin: 0;
+  padding: 1px 10px 3px 10px;
+}
+
+button.delete:hover {
+  background-color: #525252;
+  color: white;
 }
