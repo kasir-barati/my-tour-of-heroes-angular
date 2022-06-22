@@ -6,8 +6,28 @@
       &nbsp;
       <span class="name">{{ hero.name }}</span>
     </a>
+    <button
+      type="button"
+      class="delete"
+      title="delete hero"
+      (click)="onClickDeleteHero(hero.id)"
+    >
+      &times;
+    </button>
   </li>
 </ul>
+
+<div>
+  <label for="new-hero">Hero name:</label>
+  <input type="text" name="new-hero" id="new-hero" #heroName />
+  <button
+    type="button"
+    class="add-button"
+    (click)="onClickAddHero(heroName.value); heroName.value = ''"
+  >
+    Add hero
+  </button>
+</div>
 
 <!-- 
   Correct usage:
